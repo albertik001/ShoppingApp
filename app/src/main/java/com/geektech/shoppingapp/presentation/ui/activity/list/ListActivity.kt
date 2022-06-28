@@ -14,7 +14,9 @@ import com.geektech.shoppingapp.databinding.ActivityListBinding
 import com.geektech.shoppingapp.domain.entity.ShopItem
 import com.geektech.shoppingapp.presentation.ui.activity.detailActivity.DetailActivity
 import com.geektech.shoppingapp.presentation.ui.activity.main.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListActivity : AppCompatActivity(R.layout.activity_list) {
 
     private val binding: ActivityListBinding by viewBinding(ActivityListBinding::bind)
@@ -84,4 +86,5 @@ class ListActivity : AppCompatActivity(R.layout.activity_list) {
         viewModel.editShopItem(shopItem)
         initViewModel()
     }
+
 }

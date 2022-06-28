@@ -27,7 +27,7 @@ class ShopAdapter(private val onClickItem: (shopItem: ShopItem) -> Unit) :
                         )
                     )
                 }
-                else -> {
+                LAYOUT_FALSE -> {
                     return NotShopViewHolder(
                         ItemNotShopBinding.inflate(
                             LayoutInflater.from(parent.context),
