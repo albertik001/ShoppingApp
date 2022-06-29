@@ -2,6 +2,7 @@ package com.geektech.shoppingapp.presentation.ui.activity.detailActivity
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.geektech.shoppingapp.R
@@ -20,11 +21,18 @@ class DetailActivity : AppCompatActivity(R.layout.activity_detail) {
 
     private fun initListener() {
         binding.btnAddItem.setOnClickListener {
+            val etName = binding.etName.text.toString()
+            val etCount = binding.etCount.text.toString()
             val intent = Intent()
-            intent.putExtra("detailName", binding.etName.text.toString())
-            intent.putExtra("detailCount", binding.etCount.text.toString())
-            setResult(RESULT_OK, intent)
-            finish()
+            if (etName.isNotEmpty() && etCount.isNotEmpty()) {
+                intent.putExtra("detailName", etName)
+                intent.putExtra("detailCount", etCount)
+                setResult(RESULT_OK, intent)
+                finish()
+            } else {
+                Toast.makeText(this, "Заполните оба поля", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
     }

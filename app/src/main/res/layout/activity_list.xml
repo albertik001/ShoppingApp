@@ -7,6 +7,8 @@
     tools:context=".presentation.ui.activity.list.ListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:overScrollMode="never"
+        android:scrollbars="vertical"
         android:id="@+id/list_rv"
         android:layout_width="0dp"
         android:layout_height="0dp"

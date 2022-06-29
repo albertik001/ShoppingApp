@@ -45,8 +45,8 @@ class ShopAdapter(private val onClickItem: (shopItem: ShopItem) -> Unit) :
 
     override fun getItemViewType(position: Int): Int {
         return when (_list[position].enable) {
-            true -> LAYOUT_TRUE
-            false -> LAYOUT_FALSE
+            true -> LAYOUT_FALSE
+            false -> LAYOUT_TRUE
         }
     }
 

@@ -7,14 +7,14 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RepositoryModule {
+abstract class RepositoryModule {
 
-    @Provides
-    fun provideRepos(shopListRepository: ShopListRepository): ShopListRepository{
-        return shopListRepository
-    }
+    @Binds
+    @Singleton
+    abstract fun bindsRepository(shopListRepositoryImpl: ShopListRepositoryImpl): ShopListRepository
 
 }
