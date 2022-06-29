@@ -4,7 +4,6 @@ import com.geektech.shoppingapp.data.repository.ShopListRepositoryImpl
 import com.geektech.shoppingapp.domain.repository.ShopListRepository
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
@@ -13,8 +12,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
 
-    @Binds
     @Singleton
+    @Binds
     abstract fun bindsRepository(shopListRepositoryImpl: ShopListRepositoryImpl): ShopListRepository
 
 }

@@ -20,7 +20,7 @@ class ShopListRepositoryImpl @Inject constructor(private val shopListDao: ShopLi
     private val shopListLD = MutableLiveData<List<ShopItem>>()
     private var autoIncrementId = 0
 
-    override fun addShopItem(shopItem: ShopItem) {
+    override suspend fun addShopItem(shopItem: ShopItem) {
 /*        if (shopItem.id == ShopItem.UNDEFINED_ID) {
             shopItem.id = autoIncrementId++
         }
@@ -29,25 +29,26 @@ class ShopListRepositoryImpl @Inject constructor(private val shopListDao: ShopLi
         shopListDao.addShopItem(mapper.mapEntityToDbModel(shopItem))
     }
 
-    override fun removeShopItem(shopItem: ShopItem) {
-        shopList.remove(shopItem)
-        updateList()
+    override suspend fun removeShopItem(shopItem: ShopItem) {
+/*        shopList.remove(shopItem)
+        updateList()*/
+        shopListDao.deleteShopItem(mapper.mapEntityToDbModel(shopItem))
     }
 
-    override fun editShopItem(shopItem: ShopItem) {
+    override suspend fun editShopItem(shopItem: ShopItem) {
 /*        val oldElement = getShopItem(shopItem.id)
         removeShopItem(oldElement)
         addShopItem(shopItem)*/
         shopListDao.editShopItem(mapper.mapEntityToDbModel(shopItem))
     }
 
-    override fun getShopItem(shopItemId: Int): ShopItem {
+    override suspend fun getShopItem(shopItemId: Int): ShopItem {
         return shopList.find {
             it.id == shopItemId
         } ?: throw RuntimeException("element not found")
     }
 
-    override fun getShopList(): LiveData<List<ShopItem>> =
+    override suspend fun getShopList(): LiveData<List<ShopItem>> =
         Transformations.map(shopListDao.getAllShopItems()) {
             mapper.mapListDbModelToListEntity(it)
         }

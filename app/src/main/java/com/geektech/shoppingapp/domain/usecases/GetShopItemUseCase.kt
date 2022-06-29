@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class GetShopItemUseCase @Inject constructor(private val repository: ShopListRepository) {
 
-    fun getShopItem(shopItemId: ShopItem): ShopItem {
+    suspend fun getShopItem(shopItemId: ShopItem): ShopItem {
         return repository.getShopItem(shopItemId.id)
     }
 }

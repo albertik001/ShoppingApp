@@ -1,9 +1,12 @@
 package com.geektech.shoppingapp.presentation.ui.activity.main
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.geektech.shoppingapp.domain.entity.ShopItem
 import com.geektech.shoppingapp.domain.usecases.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,21 +19,29 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun addShopItem(shopItem: ShopItem) {
-        addShopItemUseCase.addShopItem(shopItem)
+        viewModelScope.launch(Dispatchers.IO) {
+            addShopItemUseCase.addShopItem(shopItem)
+        }
     }
 
-    fun getShopList() = getShopListUseCase.getShopList()
+    suspend fun getShopList() = getShopListUseCase.getShopList()
 
     fun removeShopItem(shopItem: ShopItem) {
-        removeShopItemUseCase.removeShopItem(shopItem)
+        viewModelScope.launch(Dispatchers.IO) {
+            removeShopItemUseCase.removeShopItem(shopItem)
+        }
     }
 
     fun editShopItem(shopItem: ShopItem) {
-        val newItem = shopItem.copy(enable = !shopItem.enable)
-        editShopItemUseCase.editShopItem(newItem)
+        viewModelScope.launch(Dispatchers.IO) {
+            val newItem = shopItem.copy(enable = !shopItem.enable)
+            editShopItemUseCase.editShopItem(newItem)
+        }
+
     }
 
-    fun getShopItem(shopItem: ShopItem): ShopItem {
-        return getShopItemUseCase.getShopItem(shopItem)
-    }
+    fun getShopItem(shopItem: ShopItem) =
+        viewModelScope.launch(Dispatchers.IO) { getShopItemUseCase.getShopItem(shopItem) }
+
 }
+

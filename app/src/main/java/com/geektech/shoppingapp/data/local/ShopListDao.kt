@@ -1,10 +1,7 @@
 package com.geektech.shoppingapp.data.local
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.geektech.shoppingapp.data.dto.ShopItemDto
 
 @Dao
@@ -14,8 +11,11 @@ interface ShopListDao {
     fun getAllShopItems(): LiveData<List<ShopItemDto>>
 
     @Insert
-    fun addShopItem(shopItemDto: ShopItemDto)
+    suspend fun addShopItem(shopItemDto: ShopItemDto)
 
     @Update
-    fun editShopItem(shopItemDto: ShopItemDto)
+    suspend fun editShopItem(shopItemDto: ShopItemDto)
+
+    @Delete
+    suspend fun deleteShopItem(shopItemDto: ShopItemDto)
 }

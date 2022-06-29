@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -15,6 +16,8 @@ import com.geektech.shoppingapp.domain.entity.ShopItem
 import com.geektech.shoppingapp.presentation.ui.activity.detailActivity.DetailActivity
 import com.geektech.shoppingapp.presentation.ui.activity.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ListActivity : AppCompatActivity(R.layout.activity_list) {
@@ -54,8 +57,10 @@ class ListActivity : AppCompatActivity(R.layout.activity_list) {
     }
 
     private fun initViewModel() {
-        viewModel.getShopList().observe(this) {
-            adapter.setLists(it)
+        lifecycleScope.launch(Dispatchers.Main) {
+            viewModel.getShopList().observe(this@ListActivity) {
+                adapter.setLists(it)
+            }
         }
     }
 
