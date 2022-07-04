@@ -1,9 +1,9 @@
-package com.geektech.shoppingapp.data.local.db
+package com.geektech.shoppingapp.data.local.db.room
 
 import android.content.Context
 import androidx.room.Room
-import com.geektech.shoppingapp.data.local.AppDataBase
-import com.geektech.shoppingapp.data.local.ShopListDao
+import com.geektech.shoppingapp.data.local.db.room.daos.ShopListDao
+import com.geektech.shoppingapp.data.local.db.room.database.AppDataBase
 
 class RoomClient {
 

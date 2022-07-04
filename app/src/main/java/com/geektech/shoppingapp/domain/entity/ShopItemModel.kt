@@ -1,6 +1,6 @@
 package com.geektech.shoppingapp.domain.entity
 
-data class ShopItem(
+data class ShopItemModel(
     val name: String?,
     val count: Int?,
     val enable: Boolean,

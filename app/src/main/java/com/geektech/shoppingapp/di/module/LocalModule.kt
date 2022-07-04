@@ -1,8 +1,8 @@
 package com.geektech.shoppingapp.di.module
 
 import android.content.Context
-import com.geektech.shoppingapp.data.local.AppDataBase
-import com.geektech.shoppingapp.data.local.db.RoomClient
+import com.geektech.shoppingapp.data.local.db.room.database.AppDataBase
+import com.geektech.shoppingapp.data.local.db.room.RoomClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

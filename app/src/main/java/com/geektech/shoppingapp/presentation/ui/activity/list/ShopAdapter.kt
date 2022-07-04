@@ -6,14 +6,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.geektech.shoppingapp.databinding.ItemNotShopBinding
 import com.geektech.shoppingapp.databinding.ItemShopBinding
-import com.geektech.shoppingapp.domain.entity.ShopItem
+import com.geektech.shoppingapp.presentation.models.ShopItemUI
 import com.google.android.material.snackbar.Snackbar
 
-class ShopAdapter(private val onClickItem: (shopItem: ShopItem) -> Unit) :
+class ShopAdapter(
+    private val onClickItem: ((shopItemId: ShopItemUI) -> Unit?)? = null,
+    private val onLongClickItem: ((shopItemId: Int) -> Unit?)? = null
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var _list = listOf<ShopItem>()
-    var list = listOf<ShopItem>()
+    private var _list = listOf<ShopItemUI>()
+    var list = listOf<ShopItemUI>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         try {
@@ -64,7 +67,7 @@ class ShopAdapter(private val onClickItem: (shopItem: ShopItem) -> Unit) :
 
     override fun getItemCount() = _list.size
 
-    fun setLists(list: List<ShopItem>) {
+    fun setLists(list: List<ShopItemUI>) {
         val callback = ShopListDiffCallback(this._list, list)
         val diffResult = DiffUtil.calculateDiff(callback)
         diffResult.dispatchUpdatesTo(this)
@@ -74,26 +77,34 @@ class ShopAdapter(private val onClickItem: (shopItem: ShopItem) -> Unit) :
 
     inner class ShopViewHolder(private val binding: ItemShopBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(shopItem: ShopItem) {
+        fun onBind(shopItem: ShopItemUI) {
             binding.tvCount.text = shopItem.count.toString()
             binding.tvName.text = shopItem.name.toString()
 
             binding.root.setOnLongClickListener {
-                onClickItem(shopItem)
+                onClickItem?.invoke(shopItem)
                 return@setOnLongClickListener true
+            }
+
+            binding.root.setOnClickListener {
+                onLongClickItem?.invoke(shopItem.id)
             }
         }
     }
 
     inner class NotShopViewHolder(private val binding: ItemNotShopBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(shopItem: ShopItem) {
+        fun onBind(shopItem: ShopItemUI) {
             binding.tvCount.text = shopItem.count.toString()
             binding.tvName.text = shopItem.name.toString()
 
             binding.root.setOnLongClickListener {
-                onClickItem(shopItem)
+                onClickItem?.invoke(shopItem)
                 return@setOnLongClickListener true
+            }
+
+            binding.root.setOnClickListener {
+                onLongClickItem?.invoke(shopItem.id)
             }
         }
     }

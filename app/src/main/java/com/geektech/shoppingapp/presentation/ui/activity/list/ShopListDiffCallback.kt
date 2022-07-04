@@ -1,11 +1,11 @@
 package com.geektech.shoppingapp.presentation.ui.activity.list
 
 import androidx.recyclerview.widget.DiffUtil
-import com.geektech.shoppingapp.domain.entity.ShopItem
+import com.geektech.shoppingapp.presentation.models.ShopItemUI
 
 class ShopListDiffCallback(
-    private val oldList: List<ShopItem>,
-    private val newList: List<ShopItem>
+    private val oldList: List<ShopItemUI>,
+    private val newList: List<ShopItemUI>
 ) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.size

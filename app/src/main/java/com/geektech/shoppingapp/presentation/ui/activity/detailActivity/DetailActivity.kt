@@ -17,7 +17,9 @@ class DetailActivity : AppCompatActivity(R.layout.activity_detail) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initListener()
+
     }
+
 
     private fun initListener() {
         binding.btnAddItem.setOnClickListener {

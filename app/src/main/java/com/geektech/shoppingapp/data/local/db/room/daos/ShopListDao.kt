@@ -1,4 +1,4 @@
-package com.geektech.shoppingapp.data.local
+package com.geektech.shoppingapp.data.local.db.room.daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -18,4 +18,8 @@ interface ShopListDao {
 
     @Delete
     suspend fun deleteShopItem(shopItemDto: ShopItemDto)
+
+    @Query("SELECT * FROM shopitemdto WHERE id = :itemId")
+    fun getItemById(itemId: Int): ShopItemDto
+
 }

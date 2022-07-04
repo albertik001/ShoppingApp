@@ -1,11 +1,11 @@
-package com.geektech.shoppingapp.data.local
+package com.geektech.shoppingapp.data.mapper
 
 import com.geektech.shoppingapp.data.dto.ShopItemDto
-import com.geektech.shoppingapp.domain.entity.ShopItem
+import com.geektech.shoppingapp.domain.entity.ShopItemModel
 
 class ShopItemMapper {
 
-    fun mapEntityToDbModel(shopItem: ShopItem): ShopItemDto {
+    fun mapEntityToDbModel(shopItem: ShopItemModel): ShopItemDto {
         return ShopItemDto(
             id = shopItem.id,
             name = shopItem.name,
@@ -14,8 +14,8 @@ class ShopItemMapper {
         )
     }
 
-    fun mapDbModelToEntity(shopItemDto: ShopItemDto): ShopItem {
-        return ShopItem(
+    fun mapDbModelToEntity(shopItemDto: ShopItemDto): ShopItemModel {
+        return ShopItemModel(
             id = shopItemDto.id,
             name = shopItemDto.name,
             count = shopItemDto.count,

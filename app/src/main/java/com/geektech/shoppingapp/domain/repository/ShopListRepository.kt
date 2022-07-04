@@ -1,18 +1,18 @@
 package com.geektech.shoppingapp.domain.repository
 
 import androidx.lifecycle.LiveData
-import com.geektech.shoppingapp.domain.entity.ShopItem
+import com.geektech.shoppingapp.domain.entity.ShopItemModel
 
 interface ShopListRepository {
 
-    suspend fun addShopItem(shopItem: ShopItem)
+    suspend fun addShopItem(shopItem: ShopItemModel)
 
-    suspend fun removeShopItem(shopItem: ShopItem)
+    suspend fun removeShopItem(shopItem: ShopItemModel)
 
-    suspend fun editShopItem(shopItem: ShopItem)
+    suspend fun editShopItem(shopItem: ShopItemModel)
 
-    suspend fun getShopItem(shopItemId: Int): ShopItem
+    suspend fun getShopItem(shopItemId: Int): ShopItemModel
 
-    suspend fun getShopList(): LiveData<List<ShopItem>>
+    suspend fun getShopList(): LiveData<List<ShopItemModel>>
 
 }
